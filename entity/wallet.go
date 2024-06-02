@@ -26,7 +26,7 @@ func NewWallet(user *User) (*Wallet, error) {
 
 func (wallet *Wallet) Deposit(value float64) (float64, error) {
 	if value < 0 {
-		return 0, entity.NewCustomErro("O valor deve ser positivo")
+		return 0, entity.NewCustomError("O valor deve ser positivo")
 	}
 	wallet.Balance += value
 	NewTransiction(value, false, "E", "Entrada de dinheiro na carteira")
@@ -35,10 +35,10 @@ func (wallet *Wallet) Deposit(value float64) (float64, error) {
 
 func (wallet *Wallet) Withdraw(value float64) (float64, error) {
 	if value < 0 {
-		return 0, entity.NewCustomErro("O valor deve ser positivo")
+		return 0, entity.NewCustomError("O valor deve ser positivo")
 	}
 	if wallet.Balance < value {
-		return 0, entity.NewCustomErro("O valor a sacar deve ser maior ou igual ao valor disponivel na carteira")
+		return 0, entity.NewCustomError("O valor a sacar deve ser maior ou igual ao valor disponivel na carteira")
 	}
 	wallet.Balance -= value
 	NewTransiction(value, false, "S", "Saida de dinheiro da carteria")
